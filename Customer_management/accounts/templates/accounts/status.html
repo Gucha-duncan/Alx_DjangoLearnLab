@@ -1,0 +1,41 @@
+<div class="container mt-4">
+  <div class="row">
+    <!-- Total Orders -->
+    <div class="col-md-4 mb-3">
+      <div class="rounded overflow-hidden">
+        <!-- Darker title -->
+        <div style="background-color: #5dade2;" class="p-2 text-white text-center">
+          <strong>Total Orders</strong>
+        </div>
+        <!-- Lighter count -->
+        <div style="background-color: #76c7da;" class="p-3 text-dark text-center">
+          <h3>{{ total_orders }}</h3>
+        </div>
+      </div>
+    </div>
+
+    <!-- Orders Delivered -->
+    <div class="col-md-4 mb-3">
+      <div class="rounded overflow-hidden">
+        <div style="background-color: #76d7c4;" class="p-2 text-white text-center">
+          <strong>Orders Delivered</strong>
+        </div>
+        <div style="background-color: #92e0cf;" class="p-3 text-dark text-center">
+          <h3>{{ delivered }}</h3>
+        </div>
+      </div>
+    </div>
+
+    <!-- Orders Pending -->
+    <div class="col-md-4 mb-3">
+      <div class="rounded overflow-hidden">
+        <div style="background-color: #7fb3d5;" class="p-2 text-white text-center">
+          <strong>Orders Pending</strong>
+        </div>
+        <div style="background-color: #a9cce3;" class="p-3 text-dark text-center">
+          <h3>{{ pending }}</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

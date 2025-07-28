@@ -1,0 +1,74 @@
+{% extends "accounts/base.html" %}
+
+
+    
+
+    {%block content%}
+    {% include "accounts/status.html" %}
+
+    
+    
+    <div class="container my-4">
+  <h5 class="mb-4">CUSTOMERS:</h5>
+
+  <div class="row">
+    <!-- Customers Section -->
+    <div class="col-md-6 mb-4">
+      <div class="card">
+        <div class="card-body">
+          <a href="#" class="btn btn-primary mb-3">Create Customer</a>
+          <table class="table table-bordered">
+            <thead class="thead-light">
+              <tr>
+                <th>Customer</th>
+                <th>Orders</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Sample row -->
+              <tr>
+                <td>John Doe</td>
+                <td>3</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Orders Section -->
+    <div class="col-md-6 mb-4">
+      <div class="card">
+        <div class="card-body">
+          <a href="#" class="btn btn-primary mb-3 float-end">Create Order</a>
+          <div class="clearfix"></div>
+          <table class="table table-bordered">
+            <thead class="thead-light">
+              <tr>
+                <th>Product</th>
+                <th>Date Ordered</th>
+                <th>Status</th>
+                <th>Update</th>
+                <th>Remove</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Sample row -->
+              <tr>
+                <td>Phone</td>
+                <td>2025-07-28</td>
+                <td>Delivered</td>
+                <td><a href="#" class="btn btn-sm btn-warning">Edit</a></td>
+                <td><a href="#" class="btn btn-sm btn-danger">Delete</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    {%endblock%}
+    

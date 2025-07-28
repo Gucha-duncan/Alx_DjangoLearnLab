@@ -1,0 +1,87 @@
+ {% extends "accounts/base.html" %}
+
+   {%block content%}
+
+    <div class="container mt-4">
+  <!-- Top Info Row -->
+  <div class="row mb-4">
+    <!-- Customer Actions -->
+    <div class="col-md-4 mb-3">
+      <div class="card">
+        <div class="card-body">
+          <h6 class="fw-bold">Customer:</h6>
+          <a href="#" class="btn btn-outline-info w-100 mb-2">Update Customer</a>
+          <a href="#" class="btn btn-outline-danger w-100">Delete Customer</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contact Info -->
+    <div class="col-md-4 mb-3">
+      <div class="card">
+        <div class="card-body">
+          <h6 class="fw-bold">Contact Information</h6>
+          <hr>
+          <p><strong>Email:</strong> {{ customer.email }}</p>
+          <p><strong>Phone:</strong> {{ customer.phone }}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Total Orders -->
+    <div class="col-md-4 mb-3">
+      <div class="card">
+        <div class="card-body text-center">
+          <h6 class="fw-bold">Total Orders</h6>
+          <hr>
+          <h3>{{ customer.orders.count }}</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Search Form -->
+  <form method="GET" class="mb-4">
+    <div class="input-group">
+      <input type="text" name="search" class="form-control" placeholder="Search orders...">
+      <button class="btn btn-primary" type="submit">Search</button>
+    </div>
+  </form>
+
+  <!-- Orders Table -->
+  <div class="card">
+    <div class="card-body p-0">
+      <table class="table text-center mb-0">
+        <thead style="background-color: #a9cce3;" class="text-dark">
+          <tr>
+            <th>Product</th>
+            <th>Category</th>
+            <th>Date Ordered</th>
+            <th>Status</th>
+            <th>Update</th>
+            <th>Remove</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for order in orders %}
+            <tr>
+              <td>{{ order.product.name }}</td>
+              <td>{{ order.product.category }}</td>
+              <td>{{ order.date_ordered }}</td>
+              <td>{{ order.status }}</td>
+              <td><a href="#" class="btn btn-sm btn-warning">Edit</a></td>
+              <td><a href="#" class="btn btn-sm btn-danger">Delete</a></td>
+            </tr>
+          {% empty %}
+            <tr>
+              <td colspan="6">No orders found.</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+    {%endblock%}
