@@ -1,10 +1,7 @@
- 
- {% extends "accounts/base.html" %}
- <h1>Products</h1>
+{% extends "accounts/base.html" %}
 
- {%block content%}
-
- <div class="container mt-4">
+{% block content %}
+<div class="container mt-4">
   <!-- Page Title Section -->
   <div class="mb-4">
     <div class="p-3 text-white text-center rounded" style="background-color: #5dade2;">
@@ -15,21 +12,25 @@
   <!-- Product Table -->
   <div class="card rounded">
     <div class="card-body p-0">
-      <table class="table text-center mb-0">
+      <table class="table mb-0">
         <thead style="background-color: #a9cce3;" class="text-dark">
           <tr>
-            <th class="py-3">Product</th>
-            <th class="py-3">Category</th>
-            <th class="py-3">Price</th>
+            <th class="py-3 text-start">Product</th>
+            <th class="py-3 text-start">Category</th>
+            <th class="py-3 text-start">Price</th>
           </tr>
         </thead>
         <tbody>
-          <!-- No rows yet -->
+          {% for i in products %}
+          <tr>
+            <td class="text-start">{{ i.name }}</td>
+            <td class="text-start">{{ i.category }}</td>
+            <td class="text-start">{{ i.price }}</td>
+          </tr>
+          {% endfor %}
         </tbody>
       </table>
     </div>
   </div>
 </div>
-
-
- {%endblock%}
+{% endblock %}

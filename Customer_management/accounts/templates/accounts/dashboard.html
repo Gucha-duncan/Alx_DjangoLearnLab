@@ -21,15 +21,25 @@
             <thead class="thead-light">
               <tr>
                 <th>Customer</th>
-                <th>Orders</th>
+               
+                <th>Phone Number</th>
+                
               </tr>
+              
             </thead>
             <tbody>
               <!-- Sample row -->
-              <tr>
-                <td>John Doe</td>
-                <td>3</td>
-              </tr>
+              
+                {% for customer in customers%}
+                <tr>
+                  <td>{{customer.name}}</td>
+                  <td>{{customer.phone}}</td>
+
+                  </tr>
+
+                {%endfor%}
+                
+             
             </tbody>
           </table>
         </div>
@@ -51,16 +61,24 @@
                 <th>Update</th>
                 <th>Remove</th>
               </tr>
+               {% for order in orders%}
+                <tr>
+                  <td>{{order.product}}</td>
+                  <td>{{order.date_ordered}}</td>
+                   <td>{{order.status}}</td>
+
+                   <td><a href="">Update</td>
+                    <td><a href="">Delete</td>
+
+
+                  </tr>
+
+                {%endfor%}
+                
             </thead>
             <tbody>
               <!-- Sample row -->
-              <tr>
-                <td>Phone</td>
-                <td>2025-07-28</td>
-                <td>Delivered</td>
-                <td><a href="#" class="btn btn-sm btn-warning">Edit</a></td>
-                <td><a href="#" class="btn btn-sm btn-danger">Delete</a></td>
-              </tr>
+              
             </tbody>
           </table>
         </div>

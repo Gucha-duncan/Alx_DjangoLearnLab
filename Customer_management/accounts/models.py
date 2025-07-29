@@ -30,13 +30,13 @@ class Product(models.Model):
     
 class Orders(models.Model):
     ORDER_STATUS = [
-        ('pending', 'Pending'),
+        ('Pending', 'Pending'),
         ('Delivered', 'Delivered'),
         ('Out for Delivery', 'Out for Delivery'),
     ]
     Customer = models.ForeignKey(Customer, on_delete= models.CASCADE)
-    product = models.ManyToManyField(Product, )
-    date_created = models.DateTimeField(auto_now_add= True, null= True)
+    product = models.ForeignKey(Product, on_delete= models.SET_NULL, null= True )
+    date_ordered = models.DateTimeField(auto_now_add= True, null= True)
     status = models.CharField(max_length= 500, null= True, choices= ORDER_STATUS)
     def __str__(self):
         return self.status
