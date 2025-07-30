@@ -1,0 +1,65 @@
+{% extends 'accounts/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5" style="max-width: 600px;">
+  <div class="card shadow" style="background-color: #aed6f1; border-radius: 16px; border: none; color: #333;">
+    
+    <div class="card-header text-center" style="background-color: #79c2f2; color: #1e1e1e; border-top-left-radius: 16px; border-top-right-radius: 16px;">
+      <h3 style="margin: 0; padding: 14px;">Create New Order</h3>
+    </div>
+
+    <div class="card-body" style="padding: 24px;">
+      <form action="" method="POST">
+        {% csrf_token %}
+        {% for field in form %}
+          <div class="form-group mb-4">
+            <label style="font-weight: 600;">{{ field.label_tag }}</label>
+            {{ field }}
+            {% if field.errors %}
+              <div class="text-danger small">{{ field.errors }}</div>
+            {% endif %}
+          </div>
+        {% endfor %}
+
+        <button type="submit" class="btn btn-block" style="
+          background-color: #007bff;
+          color: white;
+          border: none;
+          padding: 14px 0;
+          font-weight: bold;
+          font-size: 1.05rem;
+          border-radius: 10px;
+          box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+          transition: all 0.3s ease;
+        ">
+          Submit Order
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<style>
+  input, select, textarea {
+    background-color: #fff;
+    color: #333;
+    border-radius: 6px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    width: 100%;
+    margin-top: 5px;
+    font-weight: 500;
+  }
+
+  input:focus, select:focus, textarea:focus {
+    outline: none;
+    box-shadow: 0 0 4px #007bff;
+  }
+
+  button[type="submit"]:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+  }
+</style>
+{% endblock %}

@@ -3,11 +3,11 @@
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
+
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
-      <a class="nav-item nav-link active" href="#">Dashboard <span class="sr-only">(current)</span></a>
-  
-      <a class="nav-item nav-link" href="#">Products</a>
+      <a class="nav-item nav-link {% if request.path == '/' %}active{% endif %}" href="{% url 'home' %}">Dashboard</a>
+      <a class="nav-item nav-link {% if request.path == '/products/' %}active{% endif %}" href="{% url 'products' %}">Products</a>
       
     </div>
   </div>
