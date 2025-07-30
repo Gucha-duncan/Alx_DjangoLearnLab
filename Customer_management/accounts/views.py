@@ -37,3 +37,16 @@ def createOrder(request):
 
     context = {'form': form}
     return render(request, 'accounts/order_form.html', context)
+
+
+def createCustomer(request):
+    if request.method == 'POST':
+        form = CustomerForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/')
+    else:
+        form = CustomerForm()
+
+    context = {'form': form}
+    return render(request, 'accounts/customer_form.html', context)
