@@ -1,14 +1,70 @@
 {% extends 'accounts/base.html' %}
 {% load static %}
-{%block content%} 
+{% block content %}
 
-<p>Are you sure you want to delete "{{item}}"?</p>
+<style>
+    .delete-container {
+        background-color: #aed6f1;
+        padding: 40px;
+        max-width: 500px;
+        margin: 100px auto;
+        border-radius: 15px;
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
 
-<form method="POST">
+    .delete-container p {
+        font-size: 1.2rem;
+        color: #1e1e1e;
+        margin-bottom: 30px;
+    }
 
-    <a href="{% url 'home' %}">Cancel</a>
-    <input type="submit" name="Confirm">
+    .delete-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+    }
 
-</form>
+    .btn-cancel, .btn-confirm {
+        padding: 10px 20px;
+        font-size: 1rem;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        color: white;
+    }
 
-{%endblock%}
+    .btn-cancel {
+        background-color: #a0e6cf;
+        color: #1e1e1e;
+    }
+
+    .btn-cancel:hover {
+        background-color: #88d9be;
+    }
+
+    .btn-confirm {
+        background-color: #007bff;
+    }
+
+    .btn-confirm:hover {
+        background-color: #0056b3;
+    }
+</style>
+
+<div class="delete-container">
+    <p>Are you sure you want to delete <strong>"{{ item }}"</strong>?</p>
+
+    <form method="POST">
+        {% csrf_token %}
+        <div class="delete-buttons">
+            <a href="{% url 'home' %}" class="btn-cancel">Cancel</a>
+            <input type="submit" name="Confirm" value="Yes, Delete" class="btn-confirm">
+        </div>
+    </form>
+</div>
+
+{% endblock %}

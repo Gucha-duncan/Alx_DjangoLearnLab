@@ -39,4 +39,4 @@ class Orders(models.Model):
     date_ordered = models.DateTimeField(auto_now_add= True, null= True)
     status = models.CharField(max_length= 500, null= True, choices= ORDER_STATUS)
     def __str__(self):
-        return self.status
+     return self.product.name
