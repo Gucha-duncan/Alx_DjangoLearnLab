@@ -36,7 +36,10 @@ def loginPage(request):
             
     context = {}
     return render(request, 'accounts/login.html', context)
-    
+
+def logoutUser(request):
+    logout(request)
+    return redirect('login') 
 
 def home(request):
     orders = Orders.objects.all()
@@ -48,6 +51,9 @@ def home(request):
     
     context = {'orders': orders, 'customers':customers, 'delivered':delivered, 'pending':pending, 'total_customers': total_customers, 'total_orders': total_orders}
     return render(request, 'accounts/dashboard.html',context)
+
+
+
 
 def products(request):
     products = Product.objects.all()
@@ -105,3 +111,4 @@ def deleteOrder(request,pk):
         return redirect('/')
     context ={'item':order}
     return render(request, 'accounts/delete.html', context)
+
