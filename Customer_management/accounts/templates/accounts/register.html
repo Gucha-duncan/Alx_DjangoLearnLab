@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign Up</title>
+    <style>
+        body {
+            background: #f1f2f6;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .signup-container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            color: #222;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #1e1e1e;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 6px;
+            color: #222;
+            font-weight: 600;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px 14px;
+            margin-bottom: 18px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #f9fcff;
+            transition: border 0.3s ease;
+            color: #222;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="password"]:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+
+        .password-toggle {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: -14px;
+            margin-bottom: 18px;
+            font-size: 14px;
+            cursor: pointer;
+            color: #555;
+        }
+
+        input[type="submit"] {
+            width: 100%;
+            background-color: #007bff;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #005ecb;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 13px;
+            margin-bottom: 12px;
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: 18px;
+            font-size: 15px;
+        }
+
+        .login-link a {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="signup-container">
+        <h2>Create an Account</h2>
+        <form method="POST" action="" onsubmit="return validateForm()">
+            {% csrf_token %}
+
+            <label>{{ form.username.label }}</label>
+            {{ form.username }}
+
+            <label>{{ form.email.label }}</label>
+            {{ form.email }}
+
+            <label>{{ form.password1.label }}</label>
+            {{ form.password1 }}
+            <div class="password-toggle" onclick="togglePassword('id_password1')">👁 Show Password</div>
+
+            <label>{{ form.password2.label }}</label>
+            {{ form.password2 }}
+            <div class="password-toggle" onclick="togglePassword('id_password2')">👁 Show Password</div>
+
+            <div class="error-message" id="error-msg"></div>
+
+            <input type="submit" value="Sign Up">
+
+            <p class="login-link">
+                Already have an account?
+                <a href="{% url 'login' %}">Login</a>
+            </p>
+        </form>
+    </div>
+
+    <script>
+        function togglePassword(fieldId) {
+            const field = document.getElementById(fieldId);
+            if (field.type === "password") {
+                field.type = "text";
+            } else {
+                field.type = "password";
+            }
+        }
+
+        function validateForm() {
+            const username = document.getElementById("id_username").value.trim();
+            const email = document.getElementById("id_email").value.trim();
+            const pass1 = document.getElementById("id_password1").value;
+            const pass2 = document.getElementById("id_password2").value;
+            const errorMsg = document.getElementById("error-msg");
+
+            if (!username || !email || !pass1 || !pass2) {
+                errorMsg.textContent = "All fields are required.";
+                return false;
+            }
+
+            if (pass1.length < 8) {
+                errorMsg.textContent = "Password must be at least 8 characters.";
+                return false;
+            }
+
+            if (pass1 !== pass2) {
+                errorMsg.textContent = "Passwords do not match.";
+                return false;
+            }
+
+            errorMsg.textContent = "";
+            return true;
+        }
+    </script>
+</body>
+</html>
