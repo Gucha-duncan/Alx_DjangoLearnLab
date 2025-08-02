@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
+
+from django.contrib.auth.decorators import login_required
 from .models import *
 from .forms import *
 from django.contrib import messages
@@ -41,6 +43,7 @@ def logoutUser(request):
     logout(request)
     return redirect('login') 
 
+@login_required(login_url= 'login')
 def home(request):
     orders = Orders.objects.all()
     customers = Customer.objects.all()
@@ -54,18 +57,19 @@ def home(request):
 
 
 
-
+@login_required(login_url= 'login')
 def products(request):
     products = Product.objects.all()
     return render(request, 'accounts/products.html',{'products':products})
 
+@login_required(login_url= 'login')
 def customer(request, pk):
     customer = Customer.objects.get(id= pk)
     orders = customer.orders_set.all()
     order_count = orders.count()
     context = {'customer': customer,'orders':orders, 'order_count': order_count}
     return render(request, 'accounts/customer.html', context)
-
+@login_required(login_url= 'login')
 def createOrder(request):
     if request.method == 'POST':
         form = OrderForm(request.POST)
@@ -78,7 +82,7 @@ def createOrder(request):
     context = {'form': form}
     return render(request, 'accounts/order_form.html', context)
 
-
+@login_required(login_url= 'login')
 def createCustomer(request):
     if request.method == 'POST':
         form = CustomerForm(request.POST)
@@ -91,7 +95,7 @@ def createCustomer(request):
     context = {'form': form}
     return render(request, 'accounts/customer_form.html', context)
 
-
+@login_required(login_url= 'login')
 def updateOrder(request,pk):
     order = Orders.objects.get(id =pk)
     form = OrderForm(instance=order)
@@ -103,7 +107,7 @@ def updateOrder(request,pk):
    
     context ={'form':form}
     return render(request, 'accounts/order_form.html', context)
-
+@login_required(login_url= 'login')
 def deleteOrder(request,pk):
     order = Orders.objects.get(id =pk)
     if request.method == "POST":
