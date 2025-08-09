@@ -7,7 +7,9 @@ from django.contrib.auth.decorators import login_required
 from .models import *
 from .forms import *
 from django.contrib import messages
+from .decorators import*
 # Create your views here.
+@unauthenticated_user
 
 def registerPage(request):
     form = CreateUserForm()
@@ -44,6 +46,7 @@ def logoutUser(request):
     return redirect('login') 
 
 @login_required(login_url= 'login')
+@admin_only
 def home(request):
     orders = Orders.objects.all()
     customers = Customer.objects.all()
@@ -58,11 +61,13 @@ def home(request):
 
 
 @login_required(login_url= 'login')
+@allowed_users(allowed_roles= ['admin'])
 def products(request):
     products = Product.objects.all()
     return render(request, 'accounts/products.html',{'products':products})
 
 @login_required(login_url= 'login')
+@allowed_users(allowed_roles= ['admin'])
 def customer(request, pk):
     customer = Customer.objects.get(id= pk)
     orders = customer.orders_set.all()
@@ -70,6 +75,7 @@ def customer(request, pk):
     context = {'customer': customer,'orders':orders, 'order_count': order_count}
     return render(request, 'accounts/customer.html', context)
 @login_required(login_url= 'login')
+@allowed_users(allowed_roles= ['admin'])
 def createOrder(request):
     if request.method == 'POST':
         form = OrderForm(request.POST)
@@ -82,7 +88,7 @@ def createOrder(request):
     context = {'form': form}
     return render(request, 'accounts/order_form.html', context)
 
-@login_required(login_url= 'login')
+ 
 def createCustomer(request):
     if request.method == 'POST':
         form = CustomerForm(request.POST)
@@ -95,7 +101,7 @@ def createCustomer(request):
     context = {'form': form}
     return render(request, 'accounts/customer_form.html', context)
 
-@login_required(login_url= 'login')
+
 def updateOrder(request,pk):
     order = Orders.objects.get(id =pk)
     form = OrderForm(instance=order)
@@ -107,7 +113,7 @@ def updateOrder(request,pk):
    
     context ={'form':form}
     return render(request, 'accounts/order_form.html', context)
-@login_required(login_url= 'login')
+
 def deleteOrder(request,pk):
     order = Orders.objects.get(id =pk)
     if request.method == "POST":
