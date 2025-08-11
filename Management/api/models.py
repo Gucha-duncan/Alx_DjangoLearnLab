@@ -21,7 +21,7 @@ class Product(models.Model):
     ('health_household', 'Health & Household'),
 ]
     name = models.CharField(max_length= 200, null=True)
-    decription =models.TextField(max_length=500, blank=True)
+    description =models.TextField(max_length=500, blank=True)
     price = models.DecimalField(max_digits= 10, decimal_places=2)
     category = models.CharField(max_length=100,blank=True, choices= PRODUCT_CATEGORY)
     stock = models.PositiveIntegerField()
@@ -52,7 +52,9 @@ class Order(models.Model):
     
     
 class OrderItem(models.Model):
-        order = models.ForeignKey(Order, on_delete=models.CASCADE)
+        order = models.ForeignKey(Order,
+                                  related_name='items',
+                                  on_delete=models.CASCADE)
         product = models.ForeignKey(Product, on_delete=models.CASCADE)
         quantity = models.PositiveIntegerField()
         
